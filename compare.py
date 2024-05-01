@@ -30,6 +30,7 @@ def get_tuple(arrX, arrY):
     return  tuple
 # Задаю рисунок размером 7 на 7 и оси
 fig, ax = plt.subplots(figsize=(7, 7))
+
 a = 2
 ax.set_xlim(-16, 1)
 ax.set_ylim(-16, 1)
