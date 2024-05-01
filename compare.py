@@ -14,12 +14,11 @@ def get_deviation(arr1, arr2):
     for i in arr1:
         dev=100
         for j in arr2:
-            dev_current = sqrt((i[0]**2-j[0])**2+(i[1]**2-j[1])**2)
-
+            dev_current = sqrt((i[0]-j[0])**2+(i[1]-j[1])**2)
             if dev_current<dev:
                 dev=dev_current
         dev_sum=dev_sum+dev
-    return dev
+    return dev_sum
 
 def get_tuple(arrX, arrY):
     i=1
@@ -35,16 +34,18 @@ a = 2
 ax.set_xlim(-16, 1)
 ax.set_ylim(-16, 1)
 # Точки с опытов Пейджа
-T = np.genfromtxt('Page_0.csv', delimiter=',')
+T = np.genfromtxt('Page_22.5.csv', delimiter=',')
 # Точки с кривой, которую записал точками
 WV = np.genfromtxt('points.csv', delimiter=',')
 # Точки с критерия прочности Гениева
-G = np.genfromtxt('points_G_0.csv', delimiter=',')
+G = np.genfromtxt('points_G_22.5.csv', delimiter=',')
+
+
 pointsX = T[:, 0] * -1  # Меняю х и у местами потому что у Пейджа СИГМА2 (по y) равно СИГМА1 у Поздеева
 pointsY = T[:, 1] * -1
 ax.scatter(pointsY, pointsX, marker="x", color="black", linewidths=1)
 pageArr=get_tuple(pointsX, pointsY)
-print(T)
+#print(T)
 
 pointsX = WV[:, 0] * -1  # Меняю х и у местами потому что у Пейджа СИГМА2 (по y) равно СИГМА1 у Поздеева
 pointsY = WV[:, 1] * -1
@@ -53,7 +54,7 @@ mwArr=get_tuple(pointsX, pointsY)
 
 pointsX = G[:, 1] * 1
 pointsY = G[:, 0] * 1
-genArr=get_tuple(pointsX, pointsY)
+
 pointsX = pointsX.tolist()
 pointsY = pointsY.tolist()
 # Сгущаю точки с критерия Гениева, добавив одну точку между существующими
@@ -72,6 +73,7 @@ while j < 10:
         else:
             i = i + 1
     j = j + 1
+genArr=get_tuple(pointsX, pointsY)
 ax.scatter(pointsY, pointsX, marker=".", color="blue", linewidths=0.01)
 # ax.plot(pointsY, pointsX, color="blue")
 
@@ -102,4 +104,9 @@ ax.grid(which='minor',
 print(get_deviation(pageArr, genArr))
 print(get_deviation(pageArr, mwArr))
 
+# print(get_deviation(genArr, pageArr))
+# print(get_deviation(mwArr, pageArr))
+# a=get_deviation([[0,0],[0,0],[0,0]], [[0,2],[0,1]])
+# b=get_deviation([[0,2],[0,1]], [[0,0],[0,0],[0,0]])
+# print(a, b)
 plt.show()

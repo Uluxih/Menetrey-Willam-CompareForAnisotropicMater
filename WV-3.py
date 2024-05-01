@@ -15,13 +15,13 @@ pointsY = T[:, 1] * -1
 # Задаю рисунок размером 7 на 7 и оси
 fig, ax = plt.subplots(figsize=(7, 7))
 a=4
-ax.set_xlim(-a, 0.2)
-ax.set_ylim(-a, 0.2)
+ax.set_xlim(-a, a)
+ax.set_ylim(-a, a)
 # ax.scatter(pointsY, pointsX, color="black", linewidths=0.1)
 
-ft = 2.01
-fcu = 2
-fcb = 2
+ft = 9.01
+fcu = 9
+fcb = 9
 alpha_z = ft / fcu
 alpha_u = fcb / fcu
 r1 = sqrt(6 / 5) * (alpha_u * alpha_z) / (2 * alpha_u + alpha_z)
